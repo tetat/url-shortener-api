@@ -35,16 +35,16 @@ Install all dependencies using Composer:
 composer install
 ```
 
-Install Sanctum API
-
-```bash
-php artisan install:api
-```
-
 Copy the `.env.example` file and make the required configuration changes in the `.env` file:
 
 ```bash
 cp .env.example .env
+```
+
+Install Sanctum API
+
+```bash
+php artisan install:api
 ```
 
 Generate a new application key:

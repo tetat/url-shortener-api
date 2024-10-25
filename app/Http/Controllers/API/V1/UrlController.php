@@ -20,7 +20,7 @@ class UrlController extends Controller
 
         if ($urls->isEmpty()) {
             return response()->json([
-                'error' => 1,
+                'status' => 'error',
                 'message' => 'No urls found'
             ]);
         }
@@ -47,7 +47,7 @@ class UrlController extends Controller
 
         if (!Url::create($validated)) {
             return response([
-                'error' => 1,
+                'status' => 'error',
                 'message' => 'Something went wrong'
             ], 500);
         }

@@ -2,19 +2,21 @@
 
 namespace App\Http\Controllers\API\V2\Auth;
 
+use App\Services\UserService;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUserRequest;
-use App\Models\User;
 
 class RegisteredUserController extends Controller
 {
+    public function __construct(private UserService $userService)
+    {
+        
+    }
+
     public function store(StoreUserRequest $request)
     {
-        $user = User::create($request->all());
+        $data = $this->userService->store($request->all());
 
-        return response()->json([
-            'error' => 0,
-            'message' => 'Registration successful'
-        ], 201);
+        return response()->json($data, $data['status_code']);
     }
 }

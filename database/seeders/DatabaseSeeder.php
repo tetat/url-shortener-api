@@ -15,7 +15,7 @@ class DatabaseSeeder extends Seeder
     {
         User::factory()
             ->hasUrls(3)
-            ->count(100)
+            ->count(10)
             ->create();
     }
 }
