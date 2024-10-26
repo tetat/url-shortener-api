@@ -12,14 +12,14 @@ class UserService
         if (User::create($user)) {
             return [
                 'status' => 'success',
-                'status_code' => 201,
+                'statusCode' => 201,
                 'message' => 'Registration successful'
             ];
         }
 
         return [
             'status' => 'error',
-            'status_code' => 500,
+            'statusCode' => 500,
             'message' => 'Internal server error'
         ];
     }
@@ -28,10 +28,10 @@ class UserService
     {
         $existedUser = User::where('email', $user['email'])->first();
 
-        if (! $user || ! Hash::check($user['password'], $existedUser->password)) {
+        if (! $existedUser || ! Hash::check($user['password'], $existedUser->password)) {
             return [
                 'status' => 'error',
-                'status_code' => 403,
+                'statusCode' => 400,
                 'message' => 'Invalid credentials'
             ];
         }
@@ -40,7 +40,7 @@ class UserService
 
         return [
             'status' => 'success',
-            'status_code' => 200,
+            'statusCode' => 200,
             'message' => 'Login successful',
             'token' => $token,
             'token_type' => 'Bearer'

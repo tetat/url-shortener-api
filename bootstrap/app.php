@@ -1,11 +1,11 @@
 <?php
 
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
 use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -18,22 +18,22 @@ return Application::configure(basePath: dirname(__DIR__))
         //
     })
     ->withExceptions(function (Exceptions $exceptions) {
+        $exceptions->render(function(AuthenticationException $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage()
+            ], 401);
+        });
         $exceptions->render(function(HttpException $e) {
             return response()->json([
                 'status' => 'error',
                 'message' => $e->getMessage()
-            ], 403);
+            ], $e->getStatusCode());
         });
         $exceptions->render(function(ValidationException $e) {
             return response()->json([
                 'status' => 'error',
                 'message' => $e->getMessage()
             ], 400);
-        });
-        $exceptions->render(function(NotFoundHttpException $e) {
-            return response()->json([
-                'status' => 'error',
-                'message' => $e->getMessage()
-            ], 404);
         });
     })->create();

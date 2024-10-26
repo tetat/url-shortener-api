@@ -17,6 +17,6 @@ class RegisteredUserController extends Controller
     {
         $data = $this->userService->store($request->all());
 
-        return response()->json($data, $data['status_code']);
+        return response()->json($data, $data['statusCode']);
     }
 }

@@ -15,7 +15,7 @@ class UrlResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-          'url' => 'http://127.0.0.1:8000/api/' . substr($request->path(), 4, 2) . '/' . $this->url,
+          'url' => 'http://127.0.0.1:8000/api/' . substr($request->path(), 4, 2) . '/urls/' . $this->url,
           'originalUrl' => $this->originalUrl,
           'views' => $this->views
         ];

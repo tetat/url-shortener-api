@@ -4,9 +4,7 @@ namespace App\Http\Controllers\API\V1\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUserRequest;
-use App\Models\User;
 use App\Services\UserService;
-use Exception;
 
 class RegisteredUserController extends Controller
 {
@@ -19,6 +17,6 @@ class RegisteredUserController extends Controller
     {
         $data = $this->userService->store($request->all());
 
-        return response()->json($data, $data['status_code']);
+        return response()->json($data, $data['statusCode']);
     }
 }

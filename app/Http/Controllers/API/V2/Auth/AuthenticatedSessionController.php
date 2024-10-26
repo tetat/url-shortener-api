@@ -18,7 +18,7 @@ class AuthenticatedSessionController extends Controller
     {
         $data = $this->userService->login($request->all());
 
-        return response()->json($data, $data['status_code']);
+        return response()->json($data, $data['statusCode']);
     }
 
     public function destroy(Request $request)
