@@ -31,7 +31,7 @@ class UserService
         if (! $existedUser || ! Hash::check($user['password'], $existedUser->password)) {
             return [
                 'status' => 'error',
-                'statusCode' => 400,
+                'statusCode' => 401,
                 'message' => 'Invalid credentials'
             ];
         }

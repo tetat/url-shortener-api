@@ -2,18 +2,100 @@
 
 This is a URL shortener api application where registered user can create a short link for a long url.
 
-## Features
+## Documentation
 
-### Users
+### Version 1
 
--   User registration
--   User login
--   User can create short link
--   User can see his/her created all links with view count.
+#### Register a new user
 
-### Short Link
+-   Method: `POST`
+-   Endpoint:
 
--   Anyone can use the short link
+```bash
+http://127.0.0.1:8000/api/v1/register
+```
+
+-   Request body: You have to register with `name`, `email`, and `password`.
+-   Response
+    -   201 Created.
+    -   422 Validation error.
+
+#### User login
+
+-   Method: `POST`
+-   Endpoint:
+
+```bash
+http://127.0.0.1:8000/api/v1/login
+```
+
+-   Request body: You have to login with `email`, and `password`.
+-   Response
+    -   200 Ok.
+    -   401 Authentication fails.
+    -   422 Validation error.
+
+#### User can create short link
+
+-   Method: `POST`
+-   Endpoint:
+
+```bash
+http://127.0.0.1:8000/api/v1/urls/
+```
+
+-   Request header:
+    -   Authorization: Bearer {token}
+-   Request body: Key must be `originalUrl` and value will be your `url`.
+-   Response
+    -   201 Created.
+    -   401 Unauthorized.
+    -   422 Validation error.
+
+#### User can see his/her created all links with view count.
+
+-   Method: `GET`
+-   Endpoint:
+
+```bash
+http://127.0.0.1:8000/api/v1/users/{id}/urls
+```
+
+-   Request header:
+    -   Authorization: Bearer {token}
+-   Response
+    -   200 Ok.
+        ```bash
+        [
+            {
+                "url": "http://127.0.0.1:8000/api/v2/urls/p0u9d1",
+                "originalUrl": "https://laravel.com/docs/11.x/authorization#authorizing-actions-via-gates",
+                "views": 3
+            }
+        ]
+        ```
+    -   401 Unauthorized.
+
+#### Short Link (view)
+
+-   Method: `GET`
+-   Endpoint:
+
+```bash
+http://127.0.0.1:8000/api/v1/urls/p0u9d1
+```
+
+-   Response
+    -   200 Ok.
+    -   404 Short link is invalid or does not exist
+
+### Version 2
+
+All the previous endpoint will be same but only view count will be recorded. Endpoint must be need `v2` for example,
+
+```bash
+http://127.0.0.1:8000/api/v2/urls/p0u9d1
+```
 
 ## Installation
 
