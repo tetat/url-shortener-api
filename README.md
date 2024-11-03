@@ -123,12 +123,6 @@ Copy the `.env.example` file and make the required configuration changes in the 
 cp .env.example .env
 ```
 
-Install Sanctum API
-
-```bash
-php artisan install:api
-```
-
 Generate a new application key:
 
 ```bash

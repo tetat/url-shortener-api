@@ -20,7 +20,6 @@ class UrlService
 
     public function storeUrl(User $user, array $url)
     {
-        // dd(Session());
         $existedUrl = Url::where('originalUrl', $url['originalUrl'])->first();
 
         if ($existedUrl) {
